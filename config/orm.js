@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
   database: "desk"
 });
 
-connection.connect(function (err) {
+connection.connect(function(err) {
   if (err) {
     throw err;
   }
@@ -24,15 +24,16 @@ connection.connect(function (err) {
 
 function createDiary() {
   //console.log("Inserting a new product...\n");
-  var query = connection.query(
-    "INSERT INTO diary SET ?", {
+  connection.query(
+    "INSERT INTO diary SET ?",
+    {
       requestID: 1,
       entryType: "entryType",
       diaryText: "diaryText",
       priority: "priority",
-      time: 2,
+      time: 2
     },
-    function (err, res) {
+    function(err, res) {
       if (err) {
         throw err;
       }
@@ -40,54 +41,57 @@ function createDiary() {
       createRequest();
       // connection.end();
     }
-  )};
+  );
+}
 
-  function createRequest() {
-    //console.log("Inserting a new product...\n");
-    var query = connection.query(
-      "INSERT INTO requests SET ?", {
-        slackID: "sd",
-        requester: "diaryText",
-        initialDescription: "priority",
-        requestClass: 2,
-        reqDate: 1,
-        owner: "a",
-        procStatus:"a" ,
-        procID: 2,
-        archive: true,
-        time: 2,
-
-      },
-      function (err, res) {
-        if (err) {
-          throw err;
-        }
-        console.log(res.affectedRows + " product inserted!\n");
-        createUser()
-        // connection.end();
+function createRequest() {
+  //console.log("Inserting a new product...\n");
+  connection.query(
+    "INSERT INTO requests SET ?",
+    {
+      slackID: "sd",
+      requester: "diaryText",
+      initialDescription: "priority",
+      requestClass: 2,
+      reqDate: 1,
+      owner: "a",
+      procStatus: "a",
+      procID: 2,
+      archive: true,
+      time: 2
+    },
+    function(err, res) {
+      if (err) {
+        throw err;
       }
-    )};
+      console.log(res.affectedRows + " product inserted!\n");
+      createUser();
+      // connection.end();
+    }
+  );
+}
 
-    function createUser() {
-      //console.log("Inserting a new product...\n");
-      var query = connection.query(
-        "INSERT INTO user SET ?", {
-          slackID: "a",
-          name: "a",
-          phone: 3,
-          email: "asd",
-          customer: true,
-          operator:true,
-          other: 1,
-          time: 1,
-          
-        },
-        function (err, res) {
-          if (err) {
-            throw err;
-          }
-          console.log(res.affectedRows + " product inserted!\n");
-  
-           connection.end();
-        }
-      )};
+function createUser() {
+  //console.log("Inserting a new product...\n");
+  connection.query(
+    "INSERT INTO user SET ?",
+    {
+      slackID: "a",
+      name: "a",
+      phone: 3,
+      email: "asd",
+      customer: true,
+      operator: true,
+      other: 1,
+      time: 1
+    },
+    function(err, res) {
+      if (err) {
+        throw err;
+      }
+      console.log(res.affectedRows + " product inserted!\n");
+
+      connection.end();
+    }
+  );
+}
