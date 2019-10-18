@@ -38,6 +38,13 @@ function createDiary() {
         throw err;
       }
       console.log(res.affectedRows + " product inserted!\n");
+      connection.query(
+        "SELECT * FROM diary WHERE id = ?",
+        res.insertId,
+        function(_err, dataset) {
+          return dataset;
+        }
+      );
       createRequest();
       // connection.end();
     }
@@ -65,6 +72,13 @@ function createRequest() {
         throw err;
       }
       console.log(res.affectedRows + " product inserted!\n");
+      connection.query(
+        "SELECT * FROM requests WHERE id = ?",
+        res.insertId,
+        function(_err, dataset) {
+          return dataset;
+        }
+      );
       createUser();
       // connection.end();
     }
