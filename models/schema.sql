@@ -9,12 +9,10 @@ USE desk;
 CREATE TABLE diary
 (
 	id INT NOT NULL AUTO_INCREMENT,
-    diaryID INT (45) NOT NULL,
-	requestID INT (15) NOT NULL,
-    entryType VARCHAR (64) NOT NULL,
-    diaryText TEXT (288) NOT NULL,
-    priority VARCHAR (10) NOT NULL,
-    time INT NOT NULL,
+	requestID INT (15) NULL,
+    entryType VARCHAR (64) NULL,
+    diaryText VARCHAR (5000) NULL,
+    time INT NULL,
     PRIMARY KEY (id)
 );
 
@@ -23,17 +21,15 @@ USE desk;
 CREATE TABLE requests
 (
 	id INT NOT NULL AUTO_INCREMENT,
-    requestID INT (45) NOT NULL,
-	slackID VARCHAR (45) NOT NULL,
-    requester VARCHAR (128) NOT NULL,
-    initialDescription VARCHAR (288) NOT NULL,
-    requestClass VARCHAR (64) NOT NULL,
-    reqDate INT NOT NULL,
-    owner VARCHAR (128) NOT NULL,
-    procStatus VARCHAR (10) NOT NULL,
-    procID INT (20) NOT NULL,
-    archive BOOL NOT NULL,
-    time INT NOT NULL,
+	slackID VARCHAR (45) NULL,
+    requester VARCHAR (128) NULL,
+    initialDescription VARCHAR (5000) NULL,
+    requestClass VARCHAR (64),
+    operator VARCHAR (128) NULL,
+    procStatus VARCHAR (10) NULL,
+    procID INT (20) NULL,
+    archive BOOL NULL,
+    time INT NULL,
     PRIMARY KEY (id)
 );
 
@@ -42,13 +38,14 @@ USE desk;
 CREATE TABLE user
 (
 	id INT NOT NULL AUTO_INCREMENT,
-	slackID VARCHAR (45) NOT NULL,
-    name VARCHAR (128) NOT NULL,
-    phone INT (10) NOT NULL,
-    email VARCHAR (128) NOT NULL,
+	slackID VARCHAR (45) NULL,
+    name VARCHAR (128) NULL,
+    email VARCHAR (128) NULL,
     customer BOOL,
     operator BOOL,
     other INT,
-    time INT NOT NULL,
+    time INT NULL,
     PRIMARY KEY (id)
 );
+
+-- join diary on requests.id = dairy.requestID;
