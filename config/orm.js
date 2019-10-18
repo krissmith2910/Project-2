@@ -10,8 +10,8 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "",
-  database: ""
+  password: "password",
+  database: "desk"
 });
 
 connection.connect(function(err) {
@@ -19,80 +19,79 @@ connection.connect(function(err) {
     throw err;
   }
   console.log("connected as id " + connection.threadId + "\n");
-  createProduct();
+  createDiary();
 });
 
-function createProduct() {
+function createDiary() {
   //console.log("Inserting a new product...\n");
-  var query = connection.query(
-    "INSERT INTO .. ?",
+  connection.query(
+    "INSERT INTO diary SET ?",
     {
-      flavor: "strawberry",
-      price: 3.0,
-      quantity: 50
+      requestID: 1,
+      entryType: "entryType",
+      diaryText: "diaryText",
+      priority: "priority",
+      time: 2
     },
     function(err, res) {
       if (err) {
         throw err;
       }
       console.log(res.affectedRows + " product inserted!\n");
-      // Call updateProduct AFTER the INSERT completes
-      updateProduct();
+      createRequest();
+      // connection.end();
     }
   );
-  console.log(query.sql);
 }
-function updateProduct() {
-  console.log("Updating all Rocky Road quantities...\n");
-  var query = connection.query(
-    "UPDATE products SET ? WHERE ?",
-    [
-      {
-        quantity: 100
-      },
-      {
-        flavor: "Rocky Road"
-      }
-    ],
-    function(err, res) {
-      if (err) {
-        throw err;
-      }
-      console.log(res.affectedRows + " products updated!\n");
-      // Call deleteProduct AFTER the UPDATE completes
-      deleteProduct();
-    }
-  );
 
-  // logs the actual query being run
-  console.log(query.sql);
-}
-function deleteProduct() {
-  console.log("Deleting all strawberry icecream...\n");
+function createRequest() {
+  //console.log("Inserting a new product...\n");
   connection.query(
-    "DELETE FROM products WHERE ?",
+    "INSERT INTO requests SET ?",
     {
-      flavor: "strawberry"
+      slackID: "sd",
+      requester: "diaryText",
+      initialDescription: "priority",
+      requestClass: 2,
+      reqDate: 1,
+      owner: "a",
+      procStatus: "a",
+      procID: 2,
+      archive: true,
+      time: 2
     },
     function(err, res) {
       if (err) {
         throw err;
       }
-      console.log(res.affectedRows + " products deleted!\n");
-      // Call readProducts AFTER the DELETE completes
-      readProducts();
+      console.log(res.affectedRows + " product inserted!\n");
+      createUser();
+      // connection.end();
     }
   );
 }
 
-function readProducts() {
-  console.log("Selecting all products...\n");
-  connection.query("SELECT * FROM products", function(err, res) {
-    if (err) {
-      throw err;
+function createUser() {
+  //console.log("Inserting a new product...\n");
+  connection.query(
+    "INSERT INTO user SET ?",
+    {
+      slackID: "a",
+      name: "a",
+      phone: 3,
+      email: "asd",
+      customer: true,
+      operator: true,
+      other: 1,
+      time: 1
+    },
+    function(err, res) {
+      if (err) {
+        throw err;
+      }
+      console.log(res.affectedRows + " product inserted!\n");
+
+      connection.end();
     }
-    // Log all results of the SELECT statement
-    console.log(res);
-    connection.end();
-  });
+  );
 }
