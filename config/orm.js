@@ -1,16 +1,16 @@
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-  host: "localhost",
+  host: "bootcampdb.cnt2iobbptak.us-east-2.rds.amazonaws.com",
 
   // Your port; if not 3306
   port: 3306,
 
   // Your username
-  user: "root",
+  user: "admin",
 
   // Your password
-  password: "password",
+  password: "AwV52riYYI7OGl9kJsAE",
   database: "desk"
 });
 
@@ -19,56 +19,61 @@ connection.connect(function(err) {
     throw err;
   }
   console.log("connected as id " + connection.threadId + "\n");
-  createDiary();
 });
 
-function createDiary() {
+function createDiary(diaryDetail) {
   //console.log("Inserting a new product...\n");
-  connection.query(
-    "INSERT INTO diary SET ?",
-    {
-      requestID: 1,
-      entryType: "entryType",
-      diaryText: "diaryText",
-      priority: "priority",
-      time: 2
-    },
-    function(err, res) {
+  connection.query("INSERT INTO diary SET ?", diaryDetail, function(err, res) {
+    if (err) {
+      throw err;
+    }
+    console.log(res.affectedRows + " Diary entry inserted!\n");
+    connection.query("SELECT * FROM diary WHERE id = ?", res.insertId, function(
+      err,
+      dataset
+    ) {
       if (err) {
         throw err;
       }
-      console.log(res.affectedRows + " product inserted!\n");
-      createRequest();
-      // connection.end();
-    }
-  );
+      console.log(dataset);
+      return dataset;
+    });
+    //createRequest();
+    // connection.end();
+  });
 }
 
-function createRequest() {
+function createRequest(requestDetail) {
   //console.log("Inserting a new product...\n");
-  connection.query(
-    "INSERT INTO requests SET ?",
-    {
-      slackID: "sd",
-      requester: "diaryText",
-      initialDescription: "priority",
-      requestClass: 2,
-      reqDate: 1,
-      owner: "a",
-      procStatus: "a",
-      procID: 2,
-      archive: true,
-      time: 2
-    },
-    function(err, res) {
-      if (err) {
-        throw err;
-      }
-      console.log(res.affectedRows + " product inserted!\n");
-      createUser();
-      // connection.end();
+  connection.query("INSERT INTO requests SET ?", requestDetail, function(
+    err,
+    res
+  ) {
+    if (err) {
+      throw err;
     }
-  );
+    console.log(
+      res.affectedRows + "request created with id" + res.insertId + ". \n"
+    );
+    connection.query(
+      "SELECT * FROM requests WHERE id = ?",
+      res.insertId,
+      function(err, dataset) {
+        if (err) {
+          throw err;
+        }
+        diaryEntry = {
+          requestid: dataset[0].id,
+          entryType: "New Request",
+          diaryText: dataset[0].initialDescription,
+          time: dataset[0].time
+        };
+        createDiary(diaryEntry);
+        return dataset;
+      }
+    );
+    // connection.end();
+  });
 }
 
 function createUser() {
@@ -95,3 +100,6 @@ function createUser() {
     }
   );
 }
+module.exports.createRequest = createRequest;
+module.exports.creatDiary = createDiary;
+module.exports.createUser = createUser;
