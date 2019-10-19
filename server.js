@@ -23,6 +23,13 @@ app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/apiRoutes")(app);
+
+app.listen(PORT, function() {
+  console.log("This app is listening on PORT: " + PORT + ".");
+});
+
+module.exports = app;
+
 //require("./routes/htmlRoutes")(app);
 
 //var syncOptions = { force: false };
@@ -43,9 +50,3 @@ require("./routes/apiRoutes")(app);
 //     );
 //   });
 // });
-
-app.listen(PORT, function() {
-  console.log("This app is listening on PORT: " + PORT + ".");
-});
-
-module.exports = app;
