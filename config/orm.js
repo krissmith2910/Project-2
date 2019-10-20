@@ -26,8 +26,7 @@ MySql.prototype.createDiary = function(diaryDetail) {
   //console.log("Inserting a new product...\n");
   return new Promise(function(resolve, reject) {
     connection.query("INSERT INTO diary SET ?", diaryDetail, function(
-      err,
-      resp
+      err
     ) {
       if (err) {
         reject(err);
