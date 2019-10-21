@@ -1,13 +1,20 @@
+const { createServer } = require("http"); //newlyAddedForSlackNeeds
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
-
+const { createEventAdapter } = require("@slack/events-api"); //Slack Event Listener for event triggered messages from Slack
+//const {WebClient} = require("@slack/web-api"); //Slack Web API For communication back to Slack
+var slackSigningSecret = ""; //Security for Slack Event Listener
+//var slackToken = ""; //Security for Slack Web API
+//const web = new WebClient(slackToken); //new app from Slack Web API constructor
+const slackEvents = createEventAdapter(slackSigningSecret); //Slack event listener adapter
+const port = process.env.PORT || 3000;
 //var db = require("./models");
+const app = express();
 
-var app = express();
-var PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use("/slkdesk", slackEvents.expressMiddleware()); //middleware for Slack Event Listener. This must go before express body parsers.
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -24,8 +31,9 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/apiRoutes")(app);
 
-app.listen(PORT, function() {
-  console.log("This app is listening on PORT: " + PORT + ".");
+const server = createServer(app);
+server.listen(port, function() {
+  console.log("This app is listening on PORT: " + port + ".");
 });
 
 module.exports = app;
