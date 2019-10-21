@@ -14,7 +14,7 @@ const app = express();
 
 
 // Middleware
-app.use("/slkdesk", slackEvents.expressMiddleware()); //middleware for Slack Event Listener. This must go before express body parsers.
+app.use("/desk/requests", slackEvents.expressMiddleware()); //middleware for Slack Event Listener. This must go before express body parsers.
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));

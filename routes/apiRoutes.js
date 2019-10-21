@@ -4,9 +4,24 @@ var db = require("../config/orm");
 
 module.exports = function(app) {
   // Get all examples
-  app.post("/slkdsk", function(req, res) {
+  app.post("/desk/requests", function(req, res) {
     var newRequestId = 0;
-    db.createRequest(req.body)
+    if(req.body.challenge !== undefined){
+      console.log(req.body);
+      res.send(req.body.challenge);
+      return ("challenge");
+    }
+    console.log(req.body);
+    console.log("\n");
+    console.log(req.body.event_time);
+    console.log("\n");
+    let newReq = {
+      slackID: req.body.event.client_msg_id,
+      requester: req.body.event.user,
+      initialDescription: req.body.event.text,
+      time: req.body.event_time
+    };
+    db.createRequest(newReq)
       .then(function(createReqResp) {
         newRequestId = createReqResp;
         db.getSingleRecord(createReqResp)
