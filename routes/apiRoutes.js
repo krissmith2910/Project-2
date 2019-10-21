@@ -1,6 +1,6 @@
 //var db = require("../models");
 
-var db = require("../config/orm");
+//var db = require("../config/orm");
 
 module.exports = function(app) {
   // Get all examples
