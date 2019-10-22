@@ -1,3 +1,62 @@
-.list-group-item {
-  line-height: 2.5;
+/* main body 
+======================================= */
+
+body {
+  background-image: url("../images/wallpaper.jpg");
+  background-size: cover;
+  background-color: #979797;
+  color: white;
 }
+
+table {
+  margin-left: 8%;
+}
+
+td, th {
+  background-color: rgba(00, 00, 00, 0.750);
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+/* link dropdown  */
+/* =========================================== */
+.dropbtn {
+  background-color: rgba(00, 00, 00, 0.750);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: rgba(00, 00, 00, 0.750);;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(00, 00, 00, 0.750);}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {
+  background-color: rgba(00, 00, 00, 0.750);}
+
+/* ============================================ */
