@@ -9,7 +9,7 @@ USE desk;
 CREATE TABLE diary
 (
 	id INT NOT NULL AUTO_INCREMENT,
-	requestID INT (15) NULL,
+	requestID INT NULL,
     entryType VARCHAR (64) NULL,
     diaryText VARCHAR (5000) NULL,
     time INT NULL,
@@ -21,7 +21,7 @@ USE desk;
 CREATE TABLE requests
 (
 	id INT NOT NULL AUTO_INCREMENT,
-	slackID VARCHAR (45) NULL,
+	slackID VARCHAR (1024) NULL,
     requester VARCHAR (128) NULL,
     initialDescription VARCHAR (5000) NULL,
     requestClass VARCHAR (64),
@@ -29,7 +29,7 @@ CREATE TABLE requests
     procStatus VARCHAR (10) NULL,
     procID INT (20) NULL,
     archive BOOL NULL,
-    time INT NULL,
+    time INT UNSIGNED NULL,
     PRIMARY KEY (id)
 );
 
