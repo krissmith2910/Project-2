@@ -1,5 +1,6 @@
--- schema
+-- schema;
 
+/*
 DROP DATABASE IF EXISTS desk;
 
 CREATE DATABASE desk;
@@ -49,3 +50,5 @@ CREATE TABLE user
 );
 
 -- join diary on requests.id = dairy.requestID;
+
+*/

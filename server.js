@@ -10,7 +10,7 @@ var exphbs = require("express-handlebars");
 //var slackAuthToken = process.env.SLACK_OAUTH_TOKEN; //Security for Slack Web API
 //const web = new WebClient(slackAuthToken); //new app from Slack Web API constructor
 //const slackEvents = createEventAdapter(slackSigningSecret); //Slack event listener adapter
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
 const app = express();
 const { App } = require("@slack/bolt");
 
