@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body>
+    <div class="dropdown" style="float:left;">
+        <button class="dropbtn">Links</button>
+        <div class="dropdown-content" style="left:0;">
+          <a href="diary.html">Diary</a>
+          <!-- <a href="#">User</a> -->
+        </div>
+      </div>
+
+      <table id=table>
+        <th>Requests</th>
+        <tr>
+          <th>Slack Id</th>
+          <th>Requester</th>
+          <th>Initial Description</th>
+          <th>Request Class</th>
+          <th>Operator</th>
+          <th>Proc Status</th>
+          <th>Proc Id</th>
+          <th>Archive</th>
+          <th>Time</th>
+        </tr>
+        <tr>
+          <td>{{slackID}}</td>
+          <td>{{requester}}</td>
+          <td>{{initialDescription}}</td>
+          <td>{{requestClass}}</td>
+          <td>{{operator}}</td>
+          <td>{{procStatus}}</td>
+          <td>{{procID}}</td>
+          <td>{{archive}}</td>
+          <td>{{time}}</td>
+        </tr>
+      </table>
+      <br>
+
+    </body>
+
+    </html>
