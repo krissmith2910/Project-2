@@ -1,66 +1,45 @@
 //var db = require("../models");
-
-//var db = require("../config/orm");
+const moment = require("moment");
+db = require("../config/orm");
 
 module.exports = function(app) {
-  // Get all examples
   app.post("/desk/requests", function(req, res) {
     //var newRequestId = 0;
     console.log(req.body);
     console.log("end of body \n");
     console.log(res);
     return true;
-    // if(req.body.challenge !== undefined){
-    //   console.log(req.body);
-    //   res.send(req.body.challenge);
-    //   return ("challenge");
-    // }
-    // console.log(req.body);
-    // console.log("\n");
-    // console.log(req.body.event_time);
-    // console.log("\n");
-    // let newReq = {
-    //   slackID: req.body.event.client_msg_id,
-    //   requester: req.body.event.user,
-    //   initialDescription: req.body.event.text,
-    //   time: req.body.event_time
-    // };
-    // db.createRequest(newReq)
-    //   .then(function(createReqResp) {
-    //     newRequestId = createReqResp;
-    //     db.getSingleRecord(createReqResp)
-    //       .then(function(dataset) {
-    //         diaryEntry = {
-    //           requestid: dataset[0].id,
-    //           entryType: "New Request",
-    //           diaryText: dataset[0].initialDescription,
-    //           time: dataset[0].time
-    //         };
-    //         console.log(diaryEntry);
-    //         db.createDiary(diaryEntry)
-    //           .then(function() {
-    //             //console.log(createDiaryResp);
-    //             res.send("Request created with id# " + newRequestId);
-    //           })
-    //           .catch(function(err) {
-    //             console.log("Create New Diary Error");
-    //             console.log(err);
-    //             res.send("Create Request Error at Diary");
-    //           });
-    //       })
-    //       .catch(function(err) {
-    //         console.log("Diary Prep Error");
-    //         console.log(err);
-    //         res.send("Create Request Error at Diary Prep");
-    //       });
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //     res.send("Create Request Error at Requests");
-    //   });
   });
-  app.get("/",function(req, res) {
-    res.send("access achieved");
+
+  app.get("/desk/requests", function(req, res) {
+    //console.log(req);
+    let archiveBool = { archive: 0 };
+    db.getRequests(archiveBool)
+      .then(function(dataset) {
+        console.log(dataset);
+        strDataset = JSON.stringify(dataset);
+        parsedDataset = JSON.parse(strDataset);
+        for (let i = 0; i < parsedDataset; i++) {
+          let newTime = moment(parsedDataset[i].time * 1000).format("llll");
+          parsedDataset[i].time = newTime;
+        }
+        res.render("index", { requests: parsedDataset });
+        //res.send(parsedDataset);
+        //res.render("index", { requests: parsedDataset });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  });
+
+  app.get("/desk/reqDetail", function(req, res) {
+    db.getRequests(req.body).then(function(dataset) {
+      res.render(redDetail,{request:dataset});
+    });
+  });
+
+  app.get("/", function(req, res) {
+    res.redirect("/desk/requests");
   });
 };
 

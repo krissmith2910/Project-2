@@ -80,5 +80,18 @@ MySql.prototype.getSingleRecord = function(requestId){
   });
 };
 
+MySql.prototype.getRequests = function(whereClause){
+  return new Promise(function(resolve,reject) {
+    connection.query("SELECT * FROM requests WHERE ?",whereClause,function(err,dataset) {
+      if(err) {
+        reject(err);
+      }
+      else {
+        resolve(dataset);
+      }
+    });
+  });
+};
+
 mysql = new MySql();
 module.exports = mysql;

@@ -1,4 +1,4 @@
-//const { createServer } = require("http"); //newlyAddedForSlackNeeds
+const { createServer } = require("http"); //newlyAddedForSlackNeeds
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
@@ -35,8 +35,8 @@ const bolt = new App({
 });
 
 // Routes
-//routes = require("./routes/apiRoutes");
-//routes(app);
+routes = require("./routes/apiRoutes");
+routes(app);
 const slackActions = require("./routes/slackActions");
 slackActions(bolt);
 
@@ -48,15 +48,15 @@ slackActions(bolt);
 
 // });
 
-bolt
-  .start(process.env.PORT || 3000)
-  .then(console.log("⚡️ Bolt app is running!"))
-  .catch(function(err){console.log(err);});
+// bolt
+//   .start(process.env.PORT || 3000)
+//   .then(console.log("⚡️ Bolt app is running!"))
+//   .catch(function(err){console.log(err);});
 
-// const server = createServer(app);
-// server.listen(port, function() {
-//   console.log("This app is listening on PORT: " + port + ".");
-// });
+const server = createServer(app);
+server.listen(process.env.PORT || 3000, function() {
+  console.log("This app is listening on PORT:");
+});
 
 module.exports = app;
 module.exports = bolt;
