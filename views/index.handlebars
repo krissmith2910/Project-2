@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
   <!-- Style to fix the issue of text extending past card length -->
-  {{!-- <style>
+  <style>
     .card-body a {
       word-break: break-all;
     }
@@ -19,7 +19,7 @@
     .articleHeadline {
       line-height: 1.5;
     }
-  </style> --}}
+  </style> 
 </head> --}}
 
 {{!-- <body> --}}
@@ -53,7 +53,7 @@
         {{#each requests}}
         <tr>
           <td>
-            <button id="reqSelect" class="btn btn-default" data-id={{this.id}}> Select</button>
+            <button class="btn btn-default reqSelect" data-id={{this.id}}> Select</button>
           </td>
           <th scope="row">{{this.id}}</th>
           <td>{{this.requester}}</td>

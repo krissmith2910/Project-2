@@ -33,9 +33,9 @@ module.exports = function(app) {
   });
 
   app.get("/desk/reqDetail", function(req, res) {
-    console.log(req.query.id);
-    //res.json({response: req.query.id});
-    db.getRequests(req.query.id)
+    console.log(parseInt(req.query.id));
+    let whereValue = {id: req.query.id};
+    db.getRequests(whereValue)
       .then(function(dataset) {
         console.log(dataset);
         res.render("reqDetail", dataset[0]);
