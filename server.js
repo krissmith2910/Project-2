@@ -12,7 +12,7 @@ var exphbs = require("express-handlebars");
 //const slackEvents = createEventAdapter(slackSigningSecret); //Slack event listener adapter
 //const port = process.env.PORT || 3000;
 const app = express();
-const { App } = require("@slack/bolt");
+//const { App } = require("@slack/bolt");
 
 // Middleware
 //app.use("/desk/requests", slackEvents.expressMiddleware()); //middleware for Slack Event Listener. This must go before express body parsers.
@@ -29,16 +29,16 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-const bolt = new App({
-  token: process.env.SLACK_OAUTHBOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET
-});
+// const bolt = new App({
+//   token: process.env.SLACK_OAUTHBOT_TOKEN,
+//   signingSecret: process.env.SLACK_SIGNING_SECRET
+// });
 
 // Routes
 routes = require("./routes/apiRoutes");
 routes(app);
-const slackActions = require("./routes/slackActions");
-slackActions(bolt);
+// const slackActions = require("./routes/slackActions");
+// slackActions(bolt);
 
 // bolt.event("message", ({ event, context }) => {
 //   // say() sends a message to the channel where the event was triggered
@@ -59,7 +59,7 @@ server.listen(process.env.PORT || 3000, function() {
 });
 
 module.exports = app;
-module.exports = bolt;
+//module.exports = bolt;
 
 
 //require("./routes/htmlRoutes")(app);

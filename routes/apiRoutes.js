@@ -16,7 +16,7 @@ module.exports = function(app) {
     let archiveBool = { archive: 0 };
     db.getRequests(archiveBool)
       .then(function(dataset) {
-        console.log(dataset);
+        //console.log(dataset);
         strDataset = JSON.stringify(dataset);
         parsedDataset = JSON.parse(strDataset);
         for (let i = 0; i < parsedDataset; i++) {
@@ -33,9 +33,16 @@ module.exports = function(app) {
   });
 
   app.get("/desk/reqDetail", function(req, res) {
-    db.getRequests(req.body).then(function(dataset) {
-      res.render(redDetail,{request:dataset});
-    });
+    console.log(req.query.id);
+    //res.json({response: req.query.id});
+    db.getRequests(req.query.id)
+      .then(function(dataset) {
+        console.log(dataset);
+        res.render("reqDetail", dataset[0]);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   });
 
   app.get("/", function(req, res) {
