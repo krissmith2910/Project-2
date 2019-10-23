@@ -1,57 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
+{{!-- <!DOCTYPE html>
+<html lang="en"> --}}
 
-<head>
+{{!-- <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../styles/styles.css">
-</head>
+  <title>SLACK DESK</title>
+  <!-- Bootstrap CSS CDN  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
 
-<body>
-    <div class="dropdown" style="float:left;">
-        <button class="dropbtn">Links</button>
-        <div class="dropdown-content" style="left:0;">
-          <a href="diary.html">Diary</a>
-          <!-- <a href="#">User</a> -->
-        </div>
-      </div>
+  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
+  <!-- Style to fix the issue of text extending past card length -->
+  {{!-- <style>
+    .card-body a {
+      word-break: break-all;
+    }
 
-      <table id=table>
-        <th>Requests</th>
+    .articleHeadline {
+      line-height: 1.5;
+    }
+  </style> --}}
+</head> --}}
+
+{{!-- <body> --}}
+
+  <!-- Main Bootstrap Search -->
+  <div class="container" style="background-color: rgb(51, 207, 228);">
+
+    <!-- Jumbotron for Title -->
+    <div class="jumbotron" style="background-color: orange ; color: rgb(2, 2, 2);">
+      <h1 class="text-center">
+        <strong>
+          <i class="Header"></i> SLACK DESK</strong>
+        <img src="/images/slack.png" height="80">
+      </h1>
+
+    </div>
+
+    <table class="table">
+      <thead class="thead-light">
         <tr>
-          {{!-- <th>Slack Id</th> --}}
-          <th>Request ID</th>
-          <th>Requester</th>
-          <th>Initial Description</th>
-          <th>Request Class</th>
-          <th>Operator</th>
-          {{!-- <th>Proc Status</th>
-          <th>Proc Id</th>
-          <th>Archive</th> --}}
-          <th>When Submitted</th>
+          <th scope="col">Select</th>
+          <th scope="col">Request Id</th>
+          <th scope="col">Requester</th>
+          <th scope="col">Initial Description</th>
+          <th scope="col">Request Class</th>
+          <th scope="col">Operator</th>
+          <th scope="col">Time</th>
         </tr>
-
+      </thead>
+      <tbody>
         {{#each requests}}
         <tr>
-          {{!-- <td>{{slackID}}</td> --}}
-          <td>{{this.id}}</td>
+          <td>
+            <button id="reqSelect" class="btn btn-default" data-id={{this.id}}> Select</button>
+          </td>
+          <th scope="row">{{this.id}}</th>
           <td>{{this.requester}}</td>
           <td>{{this.initialDescription}}</td>
           <td>{{this.requestClass}}</td>
           <td>{{this.operator}}</td>
-          {{!-- <td>{{procStatus}}</td>
-          <td>{{procID}}</td>
-          <td>{{archive}}</td> --}}
           <td>{{this.time}}</td>
         </tr>
         {{/each}}
-      </table>
+        {{!-- <tr>
+            <td>
+              <button class="btn btn-default" data id=""> Select</button>
+            </td>
+            <th scope="row">2</th>
+            <td>IrvGotti</td>
+            <td>Test 2</td>
+            <td>265</td>
+            <td>test 2</td>
+            <td>10:00</td>
+          </tr>--}}
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- This row will handle all of the retrieved articles -->
+  {{!-- <div class="row">
+    <div class="col-sm-12">
       <br>
 
-    </body>
+      <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
+      <div class="card">
 
-    </html>
+      </div>
+    </div>
+  </div> --}}
+
+  <!-- Footer Region -->
+  <div class="row">
+    <div class="col-sm-12">
+
+      <!-- Line Break followed by closing -->
+      <hr>
+      <h5 class="text-center">
+        <small>Slack Desk Team
+        </small>
+      </h5>
+
+    </div>
+  </div>
+
+  </div>
+
+  <!-- jQuery JS -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/test.js"></script>
+  
+
+{{!-- </body> --}}
+
+{{!-- </html> --}}
