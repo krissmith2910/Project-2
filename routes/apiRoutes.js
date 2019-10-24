@@ -34,7 +34,7 @@ module.exports = function(app) {
 
   app.get("/desk/reqDetail", function(req, res) {
     console.log(parseInt(req.query.id));
-    let whereValue = {id: req.query.id};
+    let whereValue = { id: req.query.id };
     db.getRequests(whereValue)
       .then(function(dataset) {
         console.log(dataset);
@@ -43,6 +43,24 @@ module.exports = function(app) {
       .catch(function(err) {
         console.log(err);
       });
+
+    app.post("/desk/diary", function(req, res) {
+      console.log(req.body);
+      diaryEntryValues = {
+        requestId: req.body.requestId,
+        diaryText: `${req.body.diaryText}`,
+        entryType: "Web API Update",
+        time: Math.floor(Date.now()/1000)
+      };
+      db.newDiaryEntry(diaryEntryValues)
+        .then(function(resp) {
+          console.log(resp);
+          res.send("Update Successful");
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    });
   });
 
   app.get("/", function(req, res) {

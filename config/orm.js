@@ -25,9 +25,7 @@ function MySql() {
 MySql.prototype.createDiary = function(diaryDetail) {
   //console.log("Inserting a new product...\n");
   return new Promise(function(resolve, reject) {
-    connection.query("INSERT INTO diary SET ?", diaryDetail, function(
-      err
-    ) {
+    connection.query("INSERT INTO diary SET ?", diaryDetail, function(err) {
       if (err) {
         reject(err);
       } else {
@@ -55,6 +53,21 @@ MySql.prototype.createRequest = function(requestDetail) {
   });
 };
 
+MySql.prototype.newDiaryEntry = function(det) {
+  return new Promise(function(resolve, reject) {
+    connection.query("INSERT INTO diary SET ?", det, function(
+      err,
+      resp
+    ) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(resp);
+      }
+    });
+  });
+};
+
 MySql.prototype.createUser = function(userDetail) {
   return new Promise(function(resolve, reject) {
     connection.query("INSERT INTO user SET ?", userDetail, function(err, resp) {
@@ -67,26 +80,30 @@ MySql.prototype.createUser = function(userDetail) {
   });
 };
 
-MySql.prototype.getSingleRecord = function(requestId){
-  return new Promise(function(resolve,reject) {
-    connection.query("SELECT * FROM requests WHERE id = ?",requestId,function(err,dataset) {
-      if(err) {
+MySql.prototype.getSingleRecord = function(requestId) {
+  return new Promise(function(resolve, reject) {
+    connection.query("SELECT * FROM requests WHERE id = ?", requestId, function(
+      err,
+      dataset
+    ) {
+      if (err) {
         reject(err);
-      }
-      else {
+      } else {
         resolve(dataset);
       }
     });
   });
 };
 
-MySql.prototype.getRequests = function(whereClause){
-  return new Promise(function(resolve,reject) {
-    connection.query("SELECT * FROM requests WHERE ?",whereClause,function(err,dataset) {
-      if(err) {
+MySql.prototype.getRequests = function(whereClause) {
+  return new Promise(function(resolve, reject) {
+    connection.query("SELECT * FROM requests WHERE ?", whereClause, function(
+      err,
+      dataset
+    ) {
+      if (err) {
         reject(err);
-      }
-      else {
+      } else {
         resolve(dataset);
       }
     });
