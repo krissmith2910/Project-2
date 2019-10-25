@@ -5,10 +5,10 @@ const SlackActions = function() {
 };
 
 SlackActions.prototype.newRequest = obj => {
-  newReq = {
+  let newReq = {
     initialDescription: obj.text,
     requester: obj.user,
-    slackID: `${obj.channel}::${ts}`,
+    slackID: `${obj.channel}::${obj.ts}`,
     time: Math.floor(obj.ts)
   };
   db.createRequest(newReq)
@@ -23,8 +23,7 @@ SlackActions.prototype.newRequest = obj => {
           };
           console.log(diaryEntry);
           db.createDiary(diaryEntry)
-            .then(() => {
-              
+            .then((createDiaryResp) => {
               console.log(createDiaryResp);
               console.log("TODO setup chat to request via WEB API");
               //TODO setup chat to request via WEB API
