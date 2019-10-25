@@ -3,22 +3,31 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 //const db = require("./config/orm");
-//const { createEventAdapter } = require("@slack/events-api"); //Slack Event Listener for event triggered messages from Slack
+const { createEventAdapter } = require("@slack/events-api"); //Slack Event Listener for event triggered messages from Slack
 //const {WebClient} = require("@slack/web-api"); //Slack Web API For communication back to Slack
-//var slackSigningSecret = process.env.SLACK_SIGNING_SECRET; //Security for Slack Event Listener
-//console.log(slackSigningSecret);
+var slackSigningSecret = process.env.SLACK_SIGNING_SECRET; //Security for Slack Event Listener
+console.log(slackSigningSecret);
 //var slackAuthToken = process.env.SLACK_OAUTH_TOKEN; //Security for Slack Web API
+
+const port = process.env.PORT || 3000;
+
 //const web = new WebClient(slackAuthToken); //new app from Slack Web API constructor
-//const slackEvents = createEventAdapter(slackSigningSecret); //Slack event listener adapter
-//const port = process.env.PORT || 3000;
+const slackEvents = createEventAdapter(slackSigningSecret); //Slack event listener adapter
 const app = express();
-//const { App } = require("@slack/bolt");
 
 // Middleware
-//app.use("/desk/requests", slackEvents.expressMiddleware()); //middleware for Slack Event Listener. This must go before express body parsers.
+app.use("/slack/events", slackEvents.requestListener()); //middleware for Slack Event Listener. This must go before express body parsers.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("public")); 
+
+slackEvents.on("message", function(event) {
+  console.log(event);
+}); //slack events behavior for message events
+
+slackEvents.on("error", (error) => {
+  console.log(error.name); // TypeError
+});
 
 // Handlebars
 app.engine(
@@ -29,37 +38,18 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// const bolt = new App({
-//   token: process.env.SLACK_OAUTHBOT_TOKEN,
-//   signingSecret: process.env.SLACK_SIGNING_SECRET
-// });
-
 // Routes
 routes = require("./routes/apiRoutes");
 routes(app);
-// const slackActions = require("./routes/slackActions");
-// slackActions(bolt);
-
-// bolt.event("message", ({ event, context }) => {
-//   // say() sends a message to the channel where the event was triggered
-//   console.log(event, +"\n");
-//   console.log(context.updateConverstation + "\n");
-//   slackActions.newRequest(event);
-
-// });
-
-// bolt
-//   .start(process.env.PORT || 3000)
-//   .then(console.log("⚡️ Bolt app is running!"))
-//   .catch(function(err){console.log(err);});
+//const slackActions = require("./routes/slackActions");
+//slackActions(app);
 
 const server = createServer(app);
-server.listen(process.env.PORT || 3000, function() {
-  console.log("This app is listening on PORT:");
+server.listen(port, function() {
+  console.log("This app is listening on PORT: " + port);
 });
 
 module.exports = app;
-//module.exports = bolt;
 
 
 //require("./routes/htmlRoutes")(app);
