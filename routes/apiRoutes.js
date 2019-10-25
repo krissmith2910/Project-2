@@ -66,8 +66,7 @@ module.exports = function(app) {
   // ============================================
   app.get("/desk/diary", function(req, res) {
     let whereValue = { requestID: req.query.id };
-    // console.log(req);
-    // let archiveBool = { archive: 0 };
+
     db.getDiary(whereValue)
       .then(function(dataset) {
         //console.log(dataset);
@@ -85,7 +84,6 @@ module.exports = function(app) {
         console.log(err);
       });
   });
-  // ========================================
 
   app.get("/", function(req, res) {
     res.redirect("/desk/requests");
