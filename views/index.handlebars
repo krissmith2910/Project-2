@@ -24,94 +24,100 @@
 
 {{!-- <body> --}}
 
-  <!-- Main Bootstrap Search -->
-  <div class="container" style="background-color: rgb(51, 207, 228);">
+<!-- Main Bootstrap Search -->
+<div class="container" style="background-color: rgb(51, 207, 228);">
 
-    <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: orange ; color: rgb(2, 2, 2);">
-      <h1 class="text-center">
-        <strong>
-          <i class="Header"></i> SLACK DESK</strong>
-        <img src="/images/slack.png" height="80">
-      </h1>
+  <!-- Jumbotron for Title -->
+  <div class="jumbotron" style="background-color: orange ; color: rgb(2, 2, 2);">
+    <h1 class="text-center">
+      <strong>
+        <i class="Header"></i> SLACK DESK</strong>
+      <img src="/images/slack.png" height="80">
+    </h1>
 
-    </div>
+  </div>
 
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Select</th>
-          <th scope="col">Request Id</th>
-          <th scope="col">Requester</th>
-          <th scope="col">Initial Description</th>
-          <th scope="col">Request Class</th>
-          <th scope="col">Operator</th>
-          <th scope="col">Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each requests}}
-        <tr>
-          <td>
-            <button class="btn btn-default reqSelect" data-id={{this.id}}> Select</button>
-          </td>
-          <th scope="row">{{this.id}}</th>
-          <td>{{this.requester}}</td>
-          <td>{{this.initialDescription}}</td>
-          <td>{{this.requestClass}}</td>
-          <td>{{this.operator}}</td>
-          <td>{{this.time}}</td>
-        </tr>
-        {{/each}}
-        {{!-- <tr>
+  <!-- Table for requests  -->
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Select</th>
+        <th scope="col">Request Id</th>
+        <th scope="col">Requester</th>
+        <th scope="col">Initial Description</th>
+        <th scope="col">Request Class</th>
+        <th scope="col">Operator</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each requests}}
+      <tr>
+        <td>
+          <button class="btn btn-default reqSelect" data-id={{this.id}}> Select</button>
+        </td>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.requester}}</td>
+        <td>{{this.initialDescription}}</td>
+        <td>{{this.requestClass}}</td>
+        <td>{{this.operator}}</td>
+        <td>{{this.time}}</td>
+      </tr>
+      {{/each}}
+<br>
+<br>
+      <!-- Table for diary -->>
+
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Request Id</th>
+            <th scope="col">Entry Type</th>
+            <th scope="col">Diary Text</th>
+            <th scope="col">Diary Text</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each diary}}
+          <tr>
             <td>
-              <button class="btn btn-default" data id=""> Select</button>
+              <button class="btn btn-default reqSelect" data-id={{this.id}}> Select</button>
             </td>
-            <th scope="row">2</th>
-            <td>IrvGotti</td>
-            <td>Test 2</td>
-            <td>265</td>
-            <td>test 2</td>
-            <td>10:00</td>
-          </tr>--}}
-      </tbody>
-    </table>
-  </div>
+            <th scope="row">{{this.id}}</th>
+            <td>{{this.requestID}}</td>
+            <td>{{this.entryType}}</td>
+            <td>{{this.diaryText}}</td>
+            <td>{{this.time}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+</div>
 
 
-  <!-- This row will handle all of the retrieved articles -->
-  {{!-- <div class="row">
-    <div class="col-sm-12">
-      <br>
+<!-- Footer Region -->
+<div class="row">
+  <div class="col-sm-12">
 
-      <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
-      <div class="card">
-
-      </div>
-    </div>
-  </div> --}}
-
-  <!-- Footer Region -->
-  <div class="row">
-    <div class="col-sm-12">
-
-      <!-- Line Break followed by closing -->
-      <hr>
-      <h5 class="text-center">
-        <small>Slack Desk Team
-        </small>
-      </h5>
-
-    </div>
-  </div>
+    <!-- Line Break followed by closing -->
+    <hr>
+    <h5 class="text-center">
+      <small>Slack Desk Team
+      </small>
+    </h5>
 
   </div>
+</div>
 
-  <!-- jQuery JS -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/index.js"></script>
-  
+</div>
+
+<!-- jQuery JS -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<script src="/js/index.js"></script>
+
 
 {{!-- </body> --}}
 
