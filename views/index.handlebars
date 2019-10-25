@@ -1,30 +1,4 @@
-{{!-- <!DOCTYPE html>
-<html lang="en"> --}}
 
-{{!-- <head>
-  <meta charset="UTF-8">
-  <title>SLACK DESK</title>
-  <!-- Bootstrap CSS CDN  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
-
-  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-
-  <!-- Style to fix the issue of text extending past card length -->
-  <style>
-    .card-body a {
-      word-break: break-all;
-    }
-
-    .articleHeadline {
-      line-height: 1.5;
-    }
-  </style> 
-</head> --}}
-
-{{!-- <body> --}}
-
-<!-- Main Bootstrap Search -->
 <div class="container" style="background-color: rgb(51, 207, 228);">
 
   <!-- Jumbotron for Title -->
@@ -129,14 +103,92 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum mollitia dolor
       </table>
 </div>
 
-{{!-- ==================================================== --}}
+<!-- Footer Region -->
+<div class="row">
+  <div class="col-sm-12">
 
-      <!-- Button trigger modal -->
+    <!-- Line Break followed by closing -->
+    <hr>
+    <h5 class="text-center">
+      <small>Slack Desk Team
+      </small>
+    </h5>
+
+  </div>
+</div>
+
+=======
+
+  <!-- Jumbotron for Title -->
+  <div class="jumbotron" style="background-color: orange ; color: rgb(2, 2, 2);">
+    <h1 class="text-center">
+      <strong>
+        <i class="Header"></i> SLACK DESK</strong>
+      <img src="/images/slack.png" height="80">
+    </h1>
+
+  </div>
+
+  <!-- Table for requests  -->
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Select</th>
+        <th scope="col">Request Id</th>
+        <th scope="col">Requester</th>
+        <th scope="col">Initial Description</th>
+        <th scope="col">Request Class</th>
+        <th scope="col">Operator</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each requests}}
+      <tr>
+        <td>
+          <button class="btn btn-default reqSelect" data-id={{this.id}}> Select</button>
+        </td>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.requester}}</td>
+        <td>{{this.initialDescription}}</td>
+        <td>{{this.requestClass}}</td>
+        <td>{{this.operator}}</td>
+        <td>{{this.time}}</td>
+      </tr>
+      {{/each}}
+<br>
+<br>
+      <!-- Table for diary -->>
+
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Request Id</th>
+            <th scope="col">Entry Type</th>
+            <th scope="col">Diary Text</th>
+            <th scope="col">Diary Text</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each diary}}
+          <tr>
+            <td>
+              <button class="btn btn-default reqSelect" data-id={{this.id}}> Select</button>
+            </td>
+            <th scope="row">{{this.id}}</th>
+            <td>{{this.requestID}}</td>
+            <td>{{this.entryType}}</td>
+            <td>{{this.diaryText}}</td>
+            <td>{{this.time}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+</div>
 
 
-
-
-{{!-- ========================================================== --}}
 <!-- Footer Region -->
 <div class="row">
   <div class="col-sm-12">
@@ -154,14 +206,10 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum mollitia dolor
 </div>
 
 <!-- jQuery JS -->
+
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-<script src="/js/index.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-{{!-- </body> --}}
-
-{{!-- </html> --}}
+<script src="/js/index.js"></script>
