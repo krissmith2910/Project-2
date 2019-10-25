@@ -55,10 +55,7 @@ MySql.prototype.createRequest = function(requestDetail) {
 
 MySql.prototype.newDiaryEntry = function(det) {
   return new Promise(function(resolve, reject) {
-    connection.query("INSERT INTO diary SET ?", det, function(
-      err,
-      resp
-    ) {
+    connection.query("INSERT INTO diary SET ?", det, function(err, resp) {
       if (err) {
         reject(err);
       } else {
@@ -101,6 +98,18 @@ MySql.prototype.getRequests = function(whereClause) {
       err,
       dataset
     ) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(dataset);
+      }
+    });
+  });
+};
+
+MySql.prototype.getDiary = function(reqId) {
+  return new Promise(function(resolve, reject) {
+    connection.query("SELECT * FROM diary where ?",reqId,function(err, dataset) {
       if (err) {
         reject(err);
       } else {
