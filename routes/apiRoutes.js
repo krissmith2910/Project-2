@@ -66,7 +66,7 @@ module.exports = function(app) {
   // ============================================
   app.get("/desk/diary", function(req, res) {
     let whereValue = { requestID: req.query.id };
-    // console.log(req);
+    console.log(req.query);
     // let archiveBool = { archive: 0 };
     db.getDiary(whereValue)
       .then(function(dataset) {
