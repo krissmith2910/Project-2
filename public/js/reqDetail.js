@@ -14,14 +14,14 @@ $("#submitUpdate").click(function(e) {
     status: status,
     diaryText: diaryText
   };
-  console.log(updateDetail);
+  //console.log(updateDetail);
   $.ajax({
     type: "POST",
     url: "/desk/diary",
     data: updateDetail,
-    dataType: "application/json,charset=utf-8",
-    success: function(response) {
-      console.log(response);
-    }
+    dataType: "application/json,charset=utf-8"
+  }).then(function(resp) {
+    alert(resp);
+    window.location.replace(window.location.origin);
   });
 });

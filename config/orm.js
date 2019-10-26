@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
   // Your username
   user: "admin",
   // Your password
-  password: "AwV52riYYI7OGl9kJsAE",
+  password: process.env.AWS_DB,
   database: "desk"
 });
 
@@ -30,7 +30,7 @@ MySql.prototype.createDiary = function(diaryDetail) {
         reject(err);
       } else {
         //console.log(resp);
-        resolve(diaryDetail.requestid);
+        resolve(diaryDetail);
       }
     });
   });
@@ -108,6 +108,7 @@ MySql.prototype.getRequests = function(whereClause) {
 };
 
 MySql.prototype.getDiary = function(reqId) {
+  console.log(reqId);
   return new Promise(function(resolve, reject) {
     connection.query("SELECT * FROM diary where ?",reqId,function(err, dataset) {
       if (err) {
