@@ -16,7 +16,8 @@ SlackActions.prototype.newRequest = async obj => {
     initialDescription: obj.text,
     requester: obj.user,
     slackID: `${obj.channel}::${obj.ts}`,
-    time: Math.floor(obj.ts)
+    time: Math.floor(obj.ts),
+    archive: 0
   };
   const createdReq = await db.createRequest(newReq);
   const dataset = await db.getSingleRecord(createdReq);

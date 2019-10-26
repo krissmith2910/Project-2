@@ -9,15 +9,15 @@ module.exports = function(slackEvents) {
     if(obj.thread_ts){
       return slactions.newDiary(diaryDetail);
     }
-    console.log("slackEvtRoute");
-    console.log(obj);
+    //console.log("slackEvtRoute");
+    //console.log(obj);
     const newReqCreated = await slactions.newRequest(obj);
     console.log("New Request Created: ");
     console.log(newReqCreated);
     let returnMsg = {
       channel: obj.channel,
       thread_ts: obj.event_ts,
-      text: `A request ticket has been created with for you the the following descripton ${obj.text}`,
+      text: `A request ticket (ID# ${newReqCreated.requestid}) has been created with for you the the following descripton:\n ${obj.text}`,
     };
 
     slactions.postMessage(returnMsg).catch(err => console.trace(err));
