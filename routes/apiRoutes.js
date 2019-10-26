@@ -17,13 +17,24 @@ module.exports = function(app) {
     db.getRequests(archiveBool)
       .then(function(dataset) {
         //console.log(dataset);
-        strDataset = JSON.stringify(dataset);
-        parsedDataset = JSON.parse(strDataset);
-        for (let i = 0; i < parsedDataset; i++) {
-          let newTime = moment(parsedDataset[i].time * 1000).format("llll");
-          parsedDataset[i].time = newTime;
+        let strDataset = JSON.stringify(dataset);
+        let parsedDataset = JSON.parse(strDataset);
+        let finalDataset = [];
+        //console.log(parsedDataset);
+        for (i = 0; i < parsedDataset.length; i++) {
+          var finalObj = {
+            id: parsedDataset[i].id,
+            initialDescription: parsedDataset[i].initialDescription,
+            requester: parsedDataset[i].requester,
+            requestClass: parsedDataset[i].requestClass,
+            operator: parsedDataset[i].operator,
+            time: moment(parsedDataset[i].time * 1000).format("L LT")
+          };
+          //console.log(finalObj);
+          finalDataset.push(finalObj);
         }
-        res.render("index", { requests: parsedDataset });
+        console.log(finalDataset);
+        res.render("index", { requests: finalDataset });
         //res.send(parsedDataset);
         //res.render("index", { requests: parsedDataset });
       })
@@ -50,7 +61,7 @@ module.exports = function(app) {
         requestId: req.body.requestId,
         diaryText: `${req.body.diaryText}`,
         entryType: "Web API Update",
-        time: Math.floor(Date.now()/1000)
+        time: Math.floor(Date.now() / 1000)
       };
       db.newDiaryEntry(diaryEntryValues)
         .then(function(resp) {
@@ -87,7 +98,6 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     res.redirect("/desk/requests");
-    res.redirect("/desk/diary");
   });
 };
 

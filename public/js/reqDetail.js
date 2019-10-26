@@ -20,8 +20,11 @@ $("#submitUpdate").click(function(e) {
     url: "/desk/diary",
     data: updateDetail,
     dataType: "application/json,charset=utf-8",
-    success: function(response) {
-      console.log(response);
-    }
+    // success: function(response) {
+    //   console.log(response);
+    //   window.location.replace(window.location.host);
+    // }
+  
   });
+  window.location.replace(window.location.origin);
 });

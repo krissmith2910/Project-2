@@ -30,7 +30,7 @@ MySql.prototype.createDiary = function(diaryDetail) {
         reject(err);
       } else {
         //console.log(resp);
-        resolve(diaryDetail.requestid);
+        resolve(diaryDetail);
       }
     });
   });
