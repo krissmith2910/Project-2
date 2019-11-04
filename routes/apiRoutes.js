@@ -57,7 +57,7 @@ module.exports = function(app) {
     //console.log(req.body);
     diaryEntryValues = {
       requestId: req.body.requestId,
-      diaryText: `${req.body.diaryText}`,
+      diaryText: req.body.diaryText,
       entryType: "Web API Update",
       time: Math.floor(Date.now() / 1000)
     };
@@ -72,9 +72,18 @@ module.exports = function(app) {
       //eslint-disable-next-line camelcase
       thread_ts: messageId[1]
     };
+    let updateReq = [
+      {
+        requestClass: req.body.requestClass,
+        procStatus: req.body.status,
+        operator: req.body.operator
+      },
+      { id: req.body.requestId }
+    ];
     console.log(updateMessage);
     slactions.postMessage(updateMessage);
-    res.send("Update Successful");
+    db.updateRequest(updateReq);
+    res.json({ status: "OK" });
   });
 
   app.get("/desk/diary", function(req, res) {

@@ -19,9 +19,13 @@ $("#submitUpdate").click(function(e) {
     type: "POST",
     url: "/desk/diary",
     data: updateDetail,
-    dataType: "application/json,charset=utf-8"
-  }).then(function(resp) {
-    alert(resp);
-    window.location.replace(window.location.origin);
-  });
+    dataType: "json"
+  })
+    .done(function(resp) {
+      console.log(resp);
+      window.location.replace(window.location.origin);
+    })
+    .fail(function(_, status, err) {
+      console.log({ status, err });
+    });
 });
