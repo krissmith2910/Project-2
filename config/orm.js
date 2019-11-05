@@ -1,15 +1,17 @@
 var mysql = require("mysql");
 
-var connection = mysql.createConnection({
-  host: "bootcampdb.cnt2iobbptak.us-east-2.rds.amazonaws.com",
-  // Your port; if not 3306
-  port: 3306,
-  // Your username
-  user: "admin",
-  // Your password
-  password: process.env.AWS_DB,
-  database: "desk"
-});
+var connection = mysql.createConnection(process.env.JAWSDB_URL);
+
+// var connection = mysql.createConnection({
+//   host: "bootcampdb.cnt2iobbptak.us-east-2.rds.amazonaws.com",
+//   // Your port; if not 3306
+//   port: 3306,
+//   // Your username
+//   user: "admin",
+//   // Your password
+//   password: process.env.AWS_DB,
+//   database: "desk"
+// });
 
 connection.connect(function(err) {
   if (err) {
@@ -115,6 +117,19 @@ MySql.prototype.getDiary = function(reqId) {
         reject(err);
       } else {
         resolve(dataset);
+      }
+    });
+  });
+};
+
+MySql.prototype.updateRequest=function(arr){
+  return new Promise(function(resolve,reject){
+    connection.query("UPDATE requests SET ? WHERE ?",arr,function(err,resp){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(resp);
       }
     });
   });
